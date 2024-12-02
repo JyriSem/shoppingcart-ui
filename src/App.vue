@@ -1,8 +1,35 @@
 <template>
-  <ShoppingCart/>
+  <div id="app">
+    <div v-if="!isLoggedIn">
+      <LoginForm @login-success="handleLoginSuccess" />
+    </div>
+    <div v-else>
+      <ShoppingCart />
+    </div>
+  </div>
 </template>
 
 <script>
+import LoginForm from "@/components/LoginForm.vue";
 import ShoppingCart from "@/pages/ShoppingCart.vue";
-export default { components: { ShoppingCart } }
+
+export default {
+  components: {
+    LoginForm,
+    ShoppingCart
+  },
+  data() {
+    return {
+      isLoggedIn: false // Initial state is not logged in
+    };
+  },
+  methods: {
+    handleLoginSuccess() {
+      this.isLoggedIn = true;
+
+      // Redirect to the home page
+      this.$router.push('/');
+    }
+  }
+};
 </script>
