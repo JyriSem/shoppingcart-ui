@@ -33,7 +33,6 @@ export default {
   }),
   methods: {
     submit() {
-      // Sanitize name
       const sanitizedName = this.newProduct.name.replace(/[<>]/g, '');
       if (this.newProduct.price <= 0 || this.newProduct.quantity < 1 || !sanitizedName) {
         this.$emit('error', 'Invalid input: Ensure name is valid and price/quantity are positive');
