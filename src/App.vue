@@ -1,35 +1,61 @@
 <template>
-  <div id="app">
-    <div v-if="!isLoggedIn">
-      <LoginForm @login-success="handleLoginSuccess" />
+  <div>
+    <div v-if="!isAuthenticated">
+      <RegisterForm v-if="showRegister" @switch-to-login="showRegister = false" />
+      <LoginForm v-else @login-success="handleLoginSuccess" @switch-to-register="showRegister = true" />
     </div>
     <div v-else>
-      <ShoppingCart />
+      <div class="text-end p-2">
+        <button @click="logout" class="btn btn-outline-secondary btn-sm">Log Out</button>
+      </div>
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import LoginForm from "@/components/LoginForm.vue";
-import ShoppingCart from "@/pages/ShoppingCart.vue";
+import LoginForm from '@/components/auth/LoginForm.vue';
+import RegisterForm from '@/components/auth/RegisterForm.vue';
+import axios from 'axios';
 
 export default {
+  name: 'App',
   components: {
     LoginForm,
-    ShoppingCart
+    RegisterForm,
   },
   data() {
     return {
-      isLoggedIn: false // Initial state is not logged in
+      isAuthenticated: false,
+      showRegister: false,
     };
   },
+  async mounted() {
+    await this.checkAuth();
+  },
   methods: {
+    async checkAuth() {
+      try {
+        await axios.get('http://localhost:8089/api/cart/get-cart-items', { withCredentials: true });
+        this.isAuthenticated = true;
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        this.isAuthenticated = false;
+      }
+    },
     handleLoginSuccess() {
-      this.isLoggedIn = true;
-
-      // Redirect to the home page
-      this.$router.push('/');
-    }
-  }
+      this.isAuthenticated = true;
+      this.showRegister = false;
+    },
+    async logout() {
+      try {
+        await axios.post('http://localhost:8089/auth/logout', {}, { withCredentials: true });
+        this.isAuthenticated = false;
+      } catch (error) {
+        console.error('Logout failed:', error);
+        this.isAuthenticated = false;
+      }
+    },
+  },
 };
 </script>
