@@ -1,5 +1,5 @@
 <template>
-  <div class="register-container">
+  <div class="auth-container">
     <form @submit.prevent="handleRegister" class="p-4 card">
       <h2 class="text-center mb-4">Register</h2>
       <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
@@ -52,8 +52,5 @@ export default {
 </script>
 
 <style scoped>
-.register-container {
-  max-width: 400px;
-  margin: 10% auto;
-}
+/* No component-specific styles needed; moved to global.css */
 </style>

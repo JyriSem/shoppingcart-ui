@@ -4,11 +4,14 @@
       <RegisterForm v-if="showRegister" @switch-to-login="showRegister = false" />
       <LoginForm v-else @login-success="handleLoginSuccess" @switch-to-register="showRegister = true" />
     </div>
-    <div v-else>
-      <div class="text-end p-2">
-        <button @click="logout" class="btn btn-outline-secondary btn-sm">Log Out</button>
+    <div v-else class="container-fluid d-flex flex-column h-100">
+      <div class="header d-flex justify-content-between align-items-center p-2 mb-3 bg-light rounded">
+        <span class="text-info fw-bold">Welcome, {{ currentUsername }}</span>
+        <button @click="logout" class="btn btn-outline-secondary btn-sm" aria-label="Log out">Log Out</button>
       </div>
-      <router-view />
+      <div class="content d-flex flex-row">
+        <router-view class="flex-grow-1" />
+      </div>
     </div>
   </div>
 </template>
@@ -28,6 +31,7 @@ export default {
     return {
       isAuthenticated: false,
       showRegister: false,
+      currentUsername: '',
     };
   },
   async mounted() {
@@ -36,26 +40,42 @@ export default {
   methods: {
     async checkAuth() {
       try {
-        await axios.get('http://localhost:8089/api/cart/get-cart-items', { withCredentials: true });
+        const response = await axios.get('http://localhost:8089/auth/me', { withCredentials: true });
         this.isAuthenticated = true;
+        this.currentUsername = response.data.username;
       } catch (error) {
         console.error('Auth check failed:', error);
         this.isAuthenticated = false;
+        this.currentUsername = '';
       }
     },
-    handleLoginSuccess() {
-      this.isAuthenticated = true;
-      this.showRegister = false;
+    async handleLoginSuccess() {
+      try {
+        const response = await axios.get('http://localhost:8089/auth/me', { withCredentials: true });
+        this.isAuthenticated = true;
+        this.currentUsername = response.data.username;
+        this.showRegister = false;
+      } catch (error) {
+        console.error('Failed to fetch username:', error);
+        this.isAuthenticated = false;
+        this.currentUsername = '';
+      }
     },
     async logout() {
       try {
         await axios.post('http://localhost:8089/auth/logout', {}, { withCredentials: true });
         this.isAuthenticated = false;
+        this.currentUsername = '';
       } catch (error) {
         console.error('Logout failed:', error);
         this.isAuthenticated = false;
+        this.currentUsername = '';
       }
     },
   },
 };
 </script>
+
+<style scoped>
+/* No component-specific styles needed; moved to global.css */
+</style>

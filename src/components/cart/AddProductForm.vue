@@ -1,26 +1,24 @@
 <template>
-  <form @submit.prevent="submit" class="row g-3 align-items-center">
-    <div class="col-md-4">
+  <form @submit.prevent="submit" class="add-product-form row g-3 align-items-center">
+    <div class="col-md-4 col-12">
       <div class="input-group">
         <span class="input-group-text"><i class="bi bi-tag"></i> Item</span>
         <input v-model="newProduct.name" placeholder="Product Name" class="form-control" required />
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-12">
       <div class="input-group">
         <span class="input-group-text">€</span>
-        <input v-model.number="newProduct.price" placeholder="Price" class="form-control" type="number" step="0.01"
-          required />
+        <input v-model.number="newProduct.price" placeholder="Price" class="form-control" type="number" step="0.01" required />
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-12">
       <div class="input-group">
         <span class="input-group-text"><i class="bi bi-box-seam"></i> Quantity</span>
-        <input v-model.number="newProduct.quantity" type="number" placeholder="Quantity" class="form-control" min="1"
-          required />
+        <input v-model.number="newProduct.quantity" type="number" placeholder="Quantity" class="form-control" min="1" required />
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 col-12">
       <button class="btn btn-success w-100"><i class="bi bi-plus-circle"></i> Add</button>
     </div>
   </form>
@@ -44,3 +42,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* No component-specific styles needed; moved to global.css */
+</style>

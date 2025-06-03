@@ -15,9 +15,12 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-export const getCartItems = () => axiosInstance.get('/api/cart/get-cart-items');
+export const getCartItems = (sortBy = 'id', sortDirection = 'asc') =>
+  axiosInstance.get('/api/cart/get-cart-items', { params: { sortBy, sortDirection } });
 export const addProduct = (product) => axiosInstance.post('/api/cart/add-product', product);
 export const removeProduct = (name) => axiosInstance.delete(`/api/cart/remove-product/${name}`);
+export const updateProductQuantity = (name, quantity) =>
+  axiosInstance.put('/api/cart/update-quantity', null, { params: { name, quantity } });
 export const getCartTotal = () => axiosInstance.get('/api/cart/cart-total');
 export const getCartTax = () => axiosInstance.get('/api/cart/cart-tax');
 export const getCartTotalTaxed = () => axiosInstance.get('/api/cart/cart-total-taxed');

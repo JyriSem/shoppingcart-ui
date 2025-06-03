@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container">
+<div class="auth-container">
     <form @submit.prevent="handleLogin" class="p-4 shadow-sm bg-white rounded">
       <h2 class="text-center mb-4">Login</h2>
       <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
@@ -20,13 +20,6 @@
     </form>
   </div>
 </template>
-
-<style scoped>
-.login-container {
-  max-width: 400px;
-  margin: 10% auto;
-}
-</style>
 
 <script>
 import { login } from '@/services/auth';
@@ -55,3 +48,7 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+/* No component-specific styles needed; moved to global.css */
+</style>

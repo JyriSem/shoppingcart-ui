@@ -1,6 +1,5 @@
-/* src/styles/global.css 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f8f9fa;
@@ -9,13 +8,14 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 1rem;
 }
 
 .card {
   background: white;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .btn-primary {
@@ -48,4 +48,185 @@ body {
   color: #17a2b8 !important;
 }
 
-*/
+/* Auth Forms (Login and Register) */
+.auth-container {
+  max-width: 400px;
+  margin: 5rem auto;
+}
+
+@media (max-width: 576px) {
+  .auth-container {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+}
+
+/* Cart Form */
+.add-product-form .input-group-text {
+  min-width: 60px;
+}
+
+@media (max-width: 768px) {
+  .add-product-form .row {
+    flex-direction: column;
+  }
+  .add-product-form .col {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Cart Table */
+.table-container {
+  position: relative;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table-dark th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background-color: #343a40;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.price-cell {
+ /* display: flex;*/
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 100px;
+}
+
+.currency {
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+}
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sort-icon {
+  margin-left: 5px;
+  display: inline-block;
+  width: 12px;
+}
+
+.quantity-control {
+  display: inline-flex;
+  align-items: center;
+}
+
+.quantity-control button {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+}
+
+.quantity-control span {
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Cart Summary */
+.cart-summary .amount {
+  display: flex;
+  align-items: center;
+  min-width: 120px;
+}
+
+.cart-summary .currency {
+  display: inline-block;
+  width: 20px;
+  text-align: left;
+}
+
+/* Sticky Form in ShoppingCart */
+.sticky-form {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: white;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.cart-items-container {
+  overflow-y: auto;
+  position: relative;
+  transition: max-height 0.3s ease;
+}
+
+/* App Header */
+.header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .header .btn {
+    align-self: flex-end;
+  }
+}
+
+/* Table Column Widths */
+.col-product {
+  width: 25%;
+  min-width: 120px;
+}
+
+.col-qty {
+  width: 15%;
+  min-width: 100px;
+}
+
+.col-price {
+  width: 15%;
+  min-width: 100px;
+  text-align: right;
+}
+
+.col-action {
+  width: 15%;
+  min-width: 120px;
+  text-align: center;
+}
+
+.col-discount {
+  width: 30%;
+  min-width: 200px;
+}
+
+.col-discount label {
+  white-space: nowrap;
+  margin-right: 4px;
+}
+.price-fixed {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.currency {
+  width: 16px;
+  display: inline-block;
+  text-align: right;
+  color: #28a745; /* Match .text-success */
+}
+
+.amount {
+  min-width: 60px;
+  display: inline-block;
+  text-align: right;
+  letter-spacing: 0.5px;
+}
